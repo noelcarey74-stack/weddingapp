@@ -3,23 +3,522 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms & Conditions | WeddingApp.ie</title>
+  <title>Terms &amp; Conditions | WeddingApp.ie</title>
+  <meta name="description" content="Read the WeddingApp.ie terms and conditions, including service setup, launch pricing, post-wedding access, printed keepsake options and general service terms." />
   <style>
-    body{margin:0;font-family:Georgia,serif;background:#f7f3ef;color:#2f2a28}
-    .wrap{max-width:900px;margin:auto;padding:60px 20px}
-    h1{color:#5f463a;font-size:3rem;margin-bottom:12px}
-    p{line-height:1.8;color:#746760}
-    a{color:#5f463a;text-decoration:none;font-weight:700}
-    .card{background:#fff;border:1px solid #e7dbd2;border-radius:24px;padding:30px;box-shadow:0 18px 40px rgba(95,70,58,.12)}
+    :root {
+      --bg: #f7f3ef;
+      --bg-soft: #efe7e0;
+      --card: rgba(255, 255, 255, 0.96);
+      --text: #2f2a28;
+      --muted: #746760;
+      --accent: #7b5c4d;
+      --accent-dark: #5f463a;
+      --accent-light: #ede1d8;
+      --border: #e7dbd2;
+      --shadow: 0 18px 40px rgba(95, 70, 58, 0.12);
+      --max: 1140px;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background:
+        radial-gradient(circle at top, #fbf8f5 0%, var(--bg) 45%, #f3ece6 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 243, 239, 0.92);
+      border-bottom: 1px solid rgba(231, 219, 210, 0.85);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(95, 70, 58, 0.18);
+    }
+
+    .page-hero {
+      padding: 56px 0 18px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.9);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 38px 34px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      color: var(--accent-dark);
+      line-height: 1.08;
+    }
+
+    .intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.85;
+      max-width: 880px;
+    }
+
+    section {
+      padding: 18px 0 30px;
+    }
+
+    .terms-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.92);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+    }
+
+    .terms-block + .terms-block {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .terms-block h2 {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-size: 1.6rem;
+    }
+
+    .terms-block p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .terms-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .terms-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .terms-list li + li {
+      margin-top: 8px;
+    }
+
+    .notice-box {
+      margin-top: 20px;
+      padding: 18px;
+      background: #faf7f4;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .cta-strip {
+      margin-top: 8px;
+      background: linear-gradient(135deg, #6d5245 0%, #8e6a59 100%);
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-strip h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .cta-strip p {
+      margin: 0 auto 22px;
+      max-width: 760px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(95, 70, 58, 0.14);
+    }
+
+    .button-primary {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .button-secondary {
+      background: #fff;
+      color: var(--accent-dark);
+      border: 1px solid rgba(255,255,255,0.45);
+    }
+
+    footer {
+      padding: 24px 0 40px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        gap: 12px;
+        font-size: 0.94rem;
+      }
+
+      .hero-card,
+      .terms-card {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <p><a href="index.html">← Back to Home</a></p>
-    <div class="card">
-      <h1>Terms &amp; Conditions</h1>
-      <p>This page is ready to be built next. We will add your terms here.</p>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-title">WeddingApp.ie</div>
+        <div class="brand-sub">A modern wedding app with personal support</div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="contact.html">Enquire Now</a>
     </div>
-  </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <a class="back-link" href="index.html">← Back to Home</a>
+
+        <div class="hero-card">
+          <h1>Terms &amp; Conditions</h1>
+          <p class="intro">
+            These terms explain the general basis on which WeddingApp.ie provides its service,
+            including bookings, setup, support, post-wedding access and optional keepsake services.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="terms-card">
+          <div class="terms-block">
+            <h2>1. Service provider</h2>
+            <p>
+              WeddingApp.ie is operated by Noel Carey.
+            </p>
+            <p>
+              Contact details:
+            </p>
+            <p>
+              <strong>Noel Carey</strong><br />
+              Phone: <a href="tel:0857800352">0857800352</a><br />
+              Email: <a href="mailto:noelcarey74@yahoo.ie">noelcarey74@yahoo.ie</a>
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>2. The service</h2>
+            <p>
+              WeddingApp.ie provides a digital wedding app service which may include features such as:
+            </p>
+            <ul class="terms-list">
+              <li>Wedding app setup</li>
+              <li>Guest photo uploads</li>
+              <li>Table plan access</li>
+              <li>Digital guest book messages</li>
+              <li>QR code access</li>
+              <li>Support with updates and changes</li>
+              <li>Optional printed keepsake services</li>
+            </ul>
+          </div>
+
+          <div class="terms-block">
+            <h2>3. Booking and setup</h2>
+            <p>
+              The service begins once details are agreed between the couple and WeddingApp.ie.
+            </p>
+            <p>
+              Couples are responsible for providing the information needed for setup,
+              including wedding details, names, table plans and any other requested content.
+            </p>
+            <p>
+              WeddingApp.ie will make reasonable efforts to prepare the wedding app
+              in line with the agreed service and supplied information.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>4. Pricing</h2>
+            <p>
+              Prices shown on the website are launch or introductory prices unless otherwise stated.
+            </p>
+            <p>
+              Prices may be updated in the future. Any agreed booking should be based on the price discussed
+              at the time of enquiry or confirmation.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>5. Changes and support</h2>
+            <p>
+              WeddingApp.ie is designed to include personal support. Reasonable changes may be made before the wedding,
+              including updates to guest details or table plans, depending on the package agreed.
+            </p>
+            <p>
+              Couples should provide changes as clearly and as early as possible to help avoid mistakes or delays.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>6. Guest content and uploads</h2>
+            <p>
+              Guests may upload photos or leave messages where those features are included.
+            </p>
+            <p>
+              Couples are responsible for making sure any material they provide or request to be included
+              is appropriate for the service.
+            </p>
+            <p>
+              WeddingApp.ie reserves the right to remove content that is clearly inappropriate, unlawful or abusive.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>7. Post-wedding access</h2>
+            <p>
+              Unless otherwise agreed, the wedding app remains live for 1 month after the wedding day.
+            </p>
+            <p>
+              This allows guests time to upload photographs and leave messages after the event.
+              After that period, the live content may be removed from the service.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>8. Printed keepsake option</h2>
+            <p>
+              If a printed keepsake option is requested, it may include selected photographs,
+              guest book messages or similar material as agreed.
+            </p>
+            <p>
+              Delivery timing for printed keepsakes is typically intended to be within 2 weeks after the wedding,
+              but timing may depend on printing, preparation and delivery arrangements.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>9. Accuracy of information</h2>
+            <p>
+              WeddingApp.ie relies on the information supplied by the couple.
+              While reasonable care is taken, WeddingApp.ie cannot be responsible for errors caused by incomplete,
+              late or inaccurate information provided for the setup.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>10. Availability of the service</h2>
+            <p>
+              WeddingApp.ie aims to provide a smooth and reliable service, but no online service can guarantee
+              uninterrupted availability at all times.
+            </p>
+            <p>
+              Reasonable efforts will be made to keep the service running properly,
+              but WeddingApp.ie will not be liable for interruptions outside reasonable control.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>11. Liability</h2>
+            <p>
+              To the fullest extent permitted by law, WeddingApp.ie will not be responsible for indirect losses,
+              unexpected technical issues outside reasonable control, or loss arising from incorrect information supplied by others.
+            </p>
+          </div>
+
+          <div class="terms-block">
+            <h2>12. Changes to these terms</h2>
+            <p>
+              These terms may be updated from time to time as the service develops.
+            </p>
+          </div>
+
+          <div class="notice-box">
+            These terms are intended as a practical launch version for general website and service use.
+            If you later add online payments, automated user accounts, advanced legal requirements or wider commercial terms,
+            this page should be reviewed and expanded.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-strip">
+          <h2>Questions before booking?</h2>
+          <p>
+            If you would like to ask about packages, support, table plan updates or anything else connected to the service,
+            please get in touch directly.
+          </p>
+          <div class="button-row">
+            <a class="button button-secondary" href="pricing.html">View Pricing</a>
+            <a class="button button-primary" href="contact.html">Contact WeddingApp.ie</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© WeddingApp.ie • Designed by Noel Carey</div>
+      <div class="footer-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
