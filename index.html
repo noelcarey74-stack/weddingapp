@@ -2,80 +2,768 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WeddingApp.ie</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WeddingApp.ie | Private Wedding App for Guests, Photos, Table Plans & Messages</title>
+  <meta name="description" content="WeddingApp.ie gives couples a beautiful private wedding app for guest photos, table plans, guest messages, QR access and personal support from Noel Carey." />
   <style>
+    :root {
+      --bg: #f7f3ef;
+      --bg-soft: #efe7e0;
+      --card: rgba(255, 255, 255, 0.96);
+      --text: #2f2a28;
+      --muted: #746760;
+      --accent: #7b5c4d;
+      --accent-dark: #5f463a;
+      --accent-light: #ede1d8;
+      --border: #e7dbd2;
+      --shadow: 0 18px 40px rgba(95, 70, 58, 0.12);
+      --max: 1180px;
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Georgia, serif;
-      background: #f7f3ef;
-      text-align: center;
-      color: #2f2a28;
+      background:
+        radial-gradient(circle at top, #fbf8f5 0%, var(--bg) 45%, #f3ece6 100%);
+      color: var(--text);
     }
 
-    .wrap {
-      max-width: 700px;
-      margin: auto;
-      padding: 40px 20px;
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 243, 239, 0.92);
+      border-bottom: 1px solid rgba(231, 219, 210, 0.85);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--accent-dark); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(95, 70, 58, 0.18);
+    }
+
+    .hero {
+      padding: 76px 0 46px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #5f463a;
+      margin: 0 0 18px;
+      font-size: clamp(2.3rem, 5vw, 4.3rem);
+      line-height: 1.08;
+      color: var(--accent-dark);
     }
 
-    p {
-      color: #6f625c;
-      line-height: 1.6;
+    .hero p {
+      font-size: 1.13rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin: 0 0 26px;
+      max-width: 700px;
     }
 
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      margin-top: 30px;
-    }
-
-    .feature {
-      margin: 12px 0;
-      font-size: 1.1rem;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 22px;
     }
 
     .button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 20px;
-      background: #5f4a42;
-      color: white;
-      border-radius: 12px;
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      color: #888;
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(95, 70, 58, 0.14);
+    }
+
+    .button-primary {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .button-secondary {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--accent-dark);
+    }
+
+    .hero-note {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.8);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 32px;
+    }
+
+    .hero-card h2 {
+      margin: 0 0 18px;
+      font-size: 1.55rem;
+      color: var(--accent-dark);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 14px;
+      color: var(--text);
+      font-size: 1.06rem;
+    }
+
+    .mini-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      line-height: 1.6;
+    }
+
+    .mini-icon {
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .support-box {
+      margin-top: 24px;
+      padding: 18px 18px;
+      border-radius: 18px;
+      background: #faf7f4;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      color: var(--accent-dark);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.06rem;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-size: 1.28rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: linear-gradient(180deg, #fff 0%, #fbf7f4 100%);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .step h3 {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 1.15rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.95);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid #d8b8a3;
+      transform: translateY(-4px);
+    }
+
+    .tag {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .price-name {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 1.35rem;
+    }
+
+    .price-value {
+      margin: 0 0 14px;
+      font-size: 2rem;
+      color: var(--text);
+    }
+
+    .price-value span {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .price-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 22px;
+      display: grid;
+      gap: 11px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .price-list li::before {
+      content: "• ";
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .about-box,
+    .contact-box {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.9);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .about-box p,
+    .contact-box p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin: 22px 0 0;
+    }
+
+    .contact-item {
+      padding: 16px 18px;
+      background: #faf7f4;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .cta-strip {
+      margin: 24px 0 10px;
+      background: linear-gradient(135deg, #6d5245 0%, #8e6a59 100%);
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-strip h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+
+    .cta-strip p {
+      margin: 0 auto 22px;
+      max-width: 760px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.92);
+    }
+
+    footer {
+      padding: 22px 0 40px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .cards-3,
+      .how-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav { padding: 12px 0; }
+      .nav-links { gap: 12px; font-size: 0.94rem; }
+      .hero { padding-top: 52px; }
+      .hero-card,
+      .card,
+      .about-box,
+      .contact-box,
+      .pricing-card,
+      .step {
+        padding: 22px 18px;
+      }
+      h1 { font-size: 2.3rem; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>WeddingApp.ie</h1>
-    <p>A simple, beautiful way to manage your wedding day.</p>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-title">WeddingApp.ie</div>
+        <div class="brand-sub">A modern wedding app with personal support</div>
+      </div>
 
-    <div class="card">
-      <div class="feature">📸 Guests upload photos instantly</div>
-      <div class="feature">📍 Find your table in seconds</div>
-      <div class="feature">📖 Digital guest book</div>
-      <div class="feature">📱 QR code for easy access</div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
 
-      <a href="mailto:noelcarey74@yahoo.ie" class="button">Enquire Now</a>
+      <a class="nav-cta" href="contact.html">Enquire Now</a>
     </div>
+  </header>
 
-    <div class="footer">Designed by Noel Carey</div>
-  </div>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Private wedding app for couples across Ireland</div>
+          <h1>A beautiful, simple way to keep your wedding guests informed, organised and involved.</h1>
+          <p>
+            WeddingApp.ie gives couples a clean, modern wedding app where guests can upload photos,
+            find their table, scan a QR code, leave messages and stay connected with the day.
+            You also get personal support from Noel Carey every step of the way, including updates
+            and changes to your table plan if needed.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="contact.html">Get in Touch</a>
+            <a class="button button-secondary" href="pricing.html">View Pricing</a>
+          </div>
+
+          <div class="hero-note">
+            Personal service • Elegant setup • Easy for guests to use on the day
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h2>What couples get</h2>
+          <div class="mini-list">
+            <div class="mini-item"><span class="mini-icon">📸</span><span>Guest photo uploads in one easy place</span></div>
+            <div class="mini-item"><span class="mini-icon">📍</span><span>Simple table finder for guests</span></div>
+            <div class="mini-item"><span class="mini-icon">📖</span><span>Digital guest messages and memories</span></div>
+            <div class="mini-item"><span class="mini-icon">📱</span><span>QR code access for quick opening</span></div>
+            <div class="mini-item"><span class="mini-icon">🤝</span><span>Direct help from Noel Carey with updates and changes</span></div>
+          </div>
+
+          <div class="support-box">
+            <strong style="color:#5f463a;">A personal service, not just a template.</strong><br />
+            If anything changes before the wedding, including your table plan, you are not left on your own.
+            I work with you step by step to keep everything clean and up to date.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Why WeddingApp.ie works so well</h2>
+          <p>
+            The idea is simple — give couples one elegant place to share the important parts of the day,
+            while keeping everything easy for guests. No confusion, no messy messages, and no scrambling
+            around for updates.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <div class="card">
+            <h3>Easy for guests</h3>
+            <p>
+              Guests can open the app quickly, scan a QR code, view what they need and enjoy the day
+              without digging through texts or messages.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Helps the day run smoother</h3>
+            <p>
+              Table plans, guest information and photo sharing are all in one place, making the wedding
+              feel more organised and modern.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Personal support included</h3>
+            <p>
+              You are not buying a cold system. Noel Carey works with you directly and can help with
+              adjustments, updates and changes when needed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>
+            The process is simple from start to finish, and we can refine each part later on its own page.
+          </p>
+        </div>
+
+        <div class="how-grid">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Get in touch</h3>
+            <p>Contact Noel Carey with your wedding date, plans and what you would like included.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>App setup</h3>
+            <p>Your wedding app is prepared with the couple’s names, style, details and guest features.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Share with guests</h3>
+            <p>Guests use the QR code or direct link to access photos, table plan and wedding information.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Updates if needed</h3>
+            <p>If something changes, including table plan adjustments, support is there to help sort it out.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Popular features</h2>
+          <p>
+            These are the main features couples are most likely to want, with separate pages to be filled out next.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <div class="card">
+            <h3>Guest Photo Uploads</h3>
+            <p>Let guests upload their own photos from the day so special moments are not lost.</p>
+          </div>
+          <div class="card">
+            <h3>Table Plan Access</h3>
+            <p>Give guests a quick and easy way to find their seat without confusion.</p>
+          </div>
+          <div class="card">
+            <h3>Digital Guest Book</h3>
+            <p>Create a place where family and friends can leave messages and memories for the couple.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <div class="section-head">
+            <h2>Simple starter pricing</h2>
+            <p>
+              These are strong starting packages for the website. We can fine tune them later on the pricing page.
+            </p>
+          </div>
+
+          <div class="pricing-card">
+            <h3 class="price-name">Basic</h3>
+            <p class="price-value">€149 <span>starter package</span></p>
+            <ul class="price-list">
+              <li>Wedding app setup</li>
+              <li>Photo upload section</li>
+              <li>Table plan access</li>
+              <li>QR code entry</li>
+            </ul>
+            <a class="button button-secondary" href="pricing.html">See Pricing</a>
+          </div>
+        </div>
+
+        <div style="display:grid; gap:22px;">
+          <div class="pricing-card featured">
+            <div class="tag">Most Popular</div>
+            <h3 class="price-name">Standard</h3>
+            <p class="price-value">€249 <span>complete option</span></p>
+            <ul class="price-list">
+              <li>Everything in Basic</li>
+              <li>Digital guest book</li>
+              <li>Custom styling</li>
+              <li>Extra setup support</li>
+            </ul>
+            <a class="button button-primary" href="contact.html">Ask About Standard</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3 class="price-name">Premium</h3>
+            <p class="price-value">€399 <span>more personalised</span></p>
+            <ul class="price-list">
+              <li>Everything in Standard</li>
+              <li>More tailored setup</li>
+              <li>Extra custom sections</li>
+              <li>Priority changes and support</li>
+            </ul>
+            <a class="button button-secondary" href="pricing.html">View Full Packages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div class="about-box">
+          <div class="section-head" style="margin-bottom:16px;">
+            <h2>Personal support from Noel Carey</h2>
+          </div>
+          <p>
+            WeddingApp.ie is designed to offer something modern, useful and easy to manage for couples
+            who want a smoother wedding day experience.
+          </p>
+          <p>
+            More importantly, this is not just software left in your hands. Noel Carey works with you
+            directly and is there with you every step of the way, including any updates or changes
+            to your table plan.
+          </p>
+          <a class="button button-secondary" href="about.html">Read More About the Service</a>
+        </div>
+
+        <div class="contact-box">
+          <div class="section-head" style="margin-bottom:16px;">
+            <h2>Get in touch</h2>
+          </div>
+          <p>
+            If you would like to check availability, ask a question or talk through your wedding setup,
+            get in touch directly.
+          </p>
+
+          <div class="contact-list">
+            <div class="contact-item"><strong>Name:</strong> Noel Carey</div>
+            <div class="contact-item"><strong>Phone:</strong> <a href="tel:0857800352">0857800352</a></div>
+            <div class="contact-item"><strong>Email:</strong> <a href="mailto:noelcarey74@yahoo.ie">noelcarey74@yahoo.ie</a></div>
+          </div>
+
+          <div style="margin-top:22px;">
+            <a class="button button-primary" href="contact.html">Contact WeddingApp.ie</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-strip">
+          <h2>Make your wedding day feel more organised, modern and memorable</h2>
+          <p>
+            A private wedding app can give your guests everything they need in one elegant place,
+            while giving you direct support if anything needs to change before the big day.
+          </p>
+          <a class="button button-secondary" href="contact.html" style="background:#fff;color:#5f463a;">Start Your Enquiry</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© WeddingApp.ie • Designed by Noel Carey</div>
+      <div class="footer-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
