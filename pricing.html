@@ -4,22 +4,585 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing | WeddingApp.ie</title>
+  <meta name="description" content="View launch pricing for WeddingApp.ie, including wedding app setup, guest photo uploads, table plans, QR code access, guest book features, personal support and optional printed keepsakes." />
   <style>
-    body{margin:0;font-family:Georgia,serif;background:#f7f3ef;color:#2f2a28}
-    .wrap{max-width:900px;margin:auto;padding:60px 20px}
-    h1{color:#5f463a;font-size:3rem;margin-bottom:12px}
-    p{line-height:1.8;color:#746760}
-    a{color:#5f463a;text-decoration:none;font-weight:700}
-    .card{background:#fff;border:1px solid #e7dbd2;border-radius:24px;padding:30px;box-shadow:0 18px 40px rgba(95,70,58,.12)}
+    :root {
+      --bg: #f7f3ef;
+      --bg-soft: #efe7e0;
+      --card: rgba(255, 255, 255, 0.96);
+      --text: #2f2a28;
+      --muted: #746760;
+      --accent: #7b5c4d;
+      --accent-dark: #5f463a;
+      --accent-light: #ede1d8;
+      --border: #e7dbd2;
+      --shadow: 0 18px 40px rgba(95, 70, 58, 0.12);
+      --max: 1160px;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background:
+        radial-gradient(circle at top, #fbf8f5 0%, var(--bg) 45%, #f3ece6 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 243, 239, 0.92);
+      border-bottom: 1px solid rgba(231, 219, 210, 0.85);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-dark);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(95, 70, 58, 0.18);
+    }
+
+    .page-hero {
+      padding: 56px 0 18px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.9);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 38px 34px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      color: var(--accent-dark);
+      line-height: 1.08;
+    }
+
+    .intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.85;
+      max-width: 860px;
+    }
+
+    section {
+      padding: 18px 0 30px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      color: var(--accent-dark);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.95);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 30px 24px;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid #d8b8a3;
+      transform: translateY(-4px);
+    }
+
+    .tag {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .price-name {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 1.4rem;
+    }
+
+    .price-value {
+      margin: 0 0 10px;
+      font-size: 2.2rem;
+      color: var(--text);
+    }
+
+    .price-note {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      min-height: 48px;
+    }
+
+    .price-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .price-list li::before {
+      content: "• ";
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(95, 70, 58, 0.14);
+    }
+
+    .button-primary {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .button-secondary {
+      background: #fff;
+      color: var(--accent-dark);
+      border: 1px solid var(--border);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .info-panel {
+      background: linear-gradient(180deg, #fff 0%, #fbf7f4 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 30px 28px;
+    }
+
+    .info-panel h2 {
+      margin: 0 0 14px;
+      color: var(--accent-dark);
+      font-size: 1.8rem;
+    }
+
+    .info-panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .info-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .info-item strong {
+      color: var(--accent-dark);
+    }
+
+    .cta-strip {
+      margin-top: 8px;
+      background: linear-gradient(135deg, #6d5245 0%, #8e6a59 100%);
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-strip h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .cta-strip p {
+      margin: 0 auto 22px;
+      max-width: 760px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    @media (max-width: 1024px) {
+      .pricing-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        gap: 12px;
+        font-size: 0.94rem;
+      }
+
+      .hero-card,
+      .pricing-card,
+      .info-panel {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <p><a href="index.html">← Back to Home</a></p>
-    <div class="card">
-      <h1>Pricing</h1>
-      <p>This page is ready to be built next. We will add the full package pricing here.</p>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-title">WeddingApp.ie</div>
+        <div class="brand-sub">A modern wedding app with personal support</div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html" class="active">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="contact.html">Enquire Now</a>
     </div>
-  </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <a class="back-link" href="index.html">← Back to Home</a>
+
+        <div class="hero-card">
+          <h1>Pricing</h1>
+          <p class="intro">
+            WeddingApp.ie is built around simple launch pricing that keeps the service approachable
+            while still giving couples personal support, a polished setup and a modern guest experience.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Launch pricing</h2>
+          <p>
+            These packages are designed to be straightforward and good value for couples who want a
+            clean wedding app with real support behind it. Packages can be refined later as the service grows.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3 class="price-name">Basic</h3>
+            <p class="price-value">€99</p>
+            <p class="price-note">
+              A simple starting package for couples who want the key features in place.
+            </p>
+
+            <ul class="price-list">
+              <li>Wedding app setup</li>
+              <li>Guest photo uploads</li>
+              <li>Table plan access</li>
+              <li>QR code access</li>
+              <li>1 month post-wedding access</li>
+            </ul>
+
+            <a class="button button-secondary" href="contact.html">Ask About Basic</a>
+          </div>
+
+          <div class="pricing-card featured">
+            <div class="tag">Most Popular</div>
+            <h3 class="price-name">Standard</h3>
+            <p class="price-value">€179</p>
+            <p class="price-note">
+              The best overall option for couples who want a fuller and more personal setup.
+            </p>
+
+            <ul class="price-list">
+              <li>Everything in Basic</li>
+              <li>Digital guest book</li>
+              <li>More personalised setup</li>
+              <li>Support with changes before the wedding</li>
+              <li>1 month post-wedding access</li>
+            </ul>
+
+            <a class="button button-primary" href="contact.html">Ask About Standard</a>
+          </div>
+
+          <div class="pricing-card">
+            <h3 class="price-name">Premium</h3>
+            <p class="price-value">€279</p>
+            <p class="price-note">
+              A more complete option for couples who want extra support and a more tailored service.
+            </p>
+
+            <ul class="price-list">
+              <li>Everything in Standard</li>
+              <li>Priority support</li>
+              <li>More tailored setup</li>
+              <li>Extra help with updates and changes</li>
+              <li>1 month post-wedding access</li>
+            </ul>
+
+            <a class="button button-secondary" href="contact.html">Ask About Premium</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div class="info-panel">
+          <h2>Optional printed keepsake</h2>
+          <p>
+            For couples who want something physical to look back on after the wedding,
+            a printed keepsake can also be arranged as an extra option.
+          </p>
+
+          <div class="info-list">
+            <div class="info-item">
+              <strong>Printed Keepsake Add-On</strong><br />
+              From €69
+            </div>
+
+            <div class="info-item">
+              <strong>What it can include</strong><br />
+              Printed guest book messages and a selected set of favourite photographs.
+            </div>
+
+            <div class="info-item">
+              <strong>Delivery</strong><br />
+              Can be arranged for delivery within 2 weeks after the wedding.
+            </div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h2>Important notes</h2>
+          <p>
+            The service is designed to stay simple, manageable and personal.
+            These notes help make expectations clear from the start.
+          </p>
+
+          <div class="info-list">
+            <div class="info-item">
+              <strong>1 month live after the wedding</strong><br />
+              Your wedding app stays live for 1 month after the day so guests can continue uploading photos and leaving messages.
+            </div>
+
+            <div class="info-item">
+              <strong>Content period</strong><br />
+              After the live period ends, app content can be removed unless otherwise agreed.
+            </div>
+
+            <div class="info-item">
+              <strong>Launch pricing</strong><br />
+              These prices are introductory and may be adjusted in the future as the service develops.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-strip">
+          <h2>A personal service at a sensible launch price</h2>
+          <p>
+            WeddingApp.ie is designed for couples who want something stylish, useful and easy to manage,
+            without paying for a complicated system they do not need.
+          </p>
+          <div class="button-row">
+            <a class="button button-secondary" href="features.html">See Features</a>
+            <a class="button button-primary" href="contact.html">Start Your Enquiry</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© WeddingApp.ie • Designed by Noel Carey</div>
+      <div class="footer-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
