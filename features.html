@@ -4,22 +4,544 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Features | WeddingApp.ie</title>
+  <meta name="description" content="Explore the features of WeddingApp.ie including guest photo uploads, table plans, digital guest book, QR code access, personal support, and printed keepsake options." />
   <style>
-    body{margin:0;font-family:Georgia,serif;background:#f7f3ef;color:#2f2a28}
-    .wrap{max-width:900px;margin:auto;padding:60px 20px}
-    h1{color:#5f463a;font-size:3rem;margin-bottom:12px}
-    p{line-height:1.8;color:#746760}
-    a{color:#5f463a;text-decoration:none;font-weight:700}
-    .card{background:#fff;border:1px solid #e7dbd2;border-radius:24px;padding:30px;box-shadow:0 18px 40px rgba(95,70,58,.12)}
+    :root {
+      --bg: #f7f3ef;
+      --bg-soft: #efe7e0;
+      --card: rgba(255, 255, 255, 0.96);
+      --text: #2f2a28;
+      --muted: #746760;
+      --accent: #7b5c4d;
+      --accent-dark: #5f463a;
+      --accent-light: #ede1d8;
+      --border: #e7dbd2;
+      --shadow: 0 18px 40px rgba(95, 70, 58, 0.12);
+      --max: 1140px;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background:
+        radial-gradient(circle at top, #fbf8f5 0%, var(--bg) 45%, #f3ece6 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 243, 239, 0.92);
+      border-bottom: 1px solid rgba(231, 219, 210, 0.85);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      padding: 10px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-dark);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--accent-dark);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(95, 70, 58, 0.18);
+    }
+
+    .page-hero {
+      padding: 56px 0 18px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.9);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 38px 34px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      color: var(--accent-dark);
+      line-height: 1.08;
+    }
+
+    .intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.85;
+      max-width: 860px;
+    }
+
+    section {
+      padding: 18px 0 30px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      color: var(--accent-dark);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid rgba(231, 219, 210, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-size: 1.28rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .highlight-panel {
+      background: linear-gradient(180deg, #fff 0%, #fbf7f4 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 30px 28px;
+    }
+
+    .highlight-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .highlight-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 18px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .highlight-item strong {
+      color: var(--accent-dark);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .cta-strip {
+      margin-top: 8px;
+      background: linear-gradient(135deg, #6d5245 0%, #8e6a59 100%);
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .cta-strip h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    .cta-strip p {
+      margin: 0 auto 22px;
+      max-width: 760px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(95, 70, 58, 0.14);
+    }
+
+    .button-primary {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    .button-secondary {
+      background: #fff;
+      color: var(--accent-dark);
+      border: 1px solid var(--border);
+    }
+
+    footer {
+      padding: 24px 0 40px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    @media (max-width: 980px) {
+      .feature-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        gap: 12px;
+        font-size: 0.94rem;
+      }
+
+      .hero-card,
+      .feature-card,
+      .highlight-panel {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <p><a href="index.html">← Back to Home</a></p>
-    <div class="card">
-      <h1>Features</h1>
-      <p>This page is ready to be built next. We will add the full list of features here.</p>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-title">WeddingApp.ie</div>
+        <div class="brand-sub">A modern wedding app with personal support</div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html" class="active">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="contact.html">Enquire Now</a>
     </div>
-  </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <a class="back-link" href="index.html">← Back to Home</a>
+
+        <div class="hero-card">
+          <h1>Features</h1>
+          <p class="intro">
+            WeddingApp.ie gives couples a clean, elegant digital space for the most useful
+            parts of the wedding day. Everything is designed to be easy for guests to use
+            and easy for couples to manage, with personal support behind the service.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>The main features couples can use</h2>
+          <p>
+            These are the core parts of the service that help keep the day organised,
+            modern and memorable for both the couple and their guests.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📸</div>
+            <h3>Guest Photo Uploads</h3>
+            <p>
+              Give guests a simple place to upload photos from the day so that moments from
+              family and friends are not lost across phones and messages.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📍</div>
+            <h3>Table Plan Access</h3>
+            <p>
+              Help guests find their table quickly and easily without confusion,
+              making arrivals and seating feel much smoother.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📖</div>
+            <h3>Digital Guest Book</h3>
+            <p>
+              Create a special place where guests can leave messages, memories and warm words
+              for the couple before, during or after the wedding.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>QR Code Entry</h3>
+            <p>
+              Guests can open the wedding app quickly using a QR code,
+              making access simple and convenient on the day.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🗓️</div>
+            <h3>Wedding Day Details</h3>
+            <p>
+              Share useful information in one place, including timings, guest guidance,
+              or any details you want people to have close at hand.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🤝</div>
+            <h3>Personal Support</h3>
+            <p>
+              You are not left to manage it all alone. Noel Carey works with you directly
+              and helps with setup, updates and changes where needed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div class="highlight-panel">
+          <div class="section-head" style="margin-bottom: 12px;">
+            <h2>Extra value that makes the service stand out</h2>
+            <p>
+              WeddingApp.ie is not just about having a digital page live for the day.
+              It is designed to be useful before the wedding, during the celebration and after it as well.
+            </p>
+          </div>
+
+          <div class="highlight-list">
+            <div class="highlight-item">
+              <strong>Help with changes</strong><br />
+              If your table plan or guest details need to be adjusted, support is there to help keep everything up to date.
+            </div>
+
+            <div class="highlight-item">
+              <strong>1 month post-wedding access</strong><br />
+              The wedding app stays live for 1 month after the wedding, giving guests time to upload photos and leave messages.
+            </div>
+
+            <div class="highlight-item">
+              <strong>Clean and manageable service</strong><br />
+              After the live period ends, content can be removed unless otherwise agreed, helping keep the service tidy and practical.
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-panel">
+          <div class="section-head" style="margin-bottom: 12px;">
+            <h2>Printed keepsake option</h2>
+            <p>
+              For couples who want something physical to hold onto after the wedding,
+              WeddingApp.ie can also offer a more personal finishing touch.
+            </p>
+          </div>
+
+          <div class="highlight-list">
+            <div class="highlight-item">
+              <strong>Printed guest book messages</strong><br />
+              Guest messages can be prepared as a printed keepsake after the wedding.
+            </div>
+
+            <div class="highlight-item">
+              <strong>Selected printed photographs</strong><br />
+              A chosen set of favourite photographs can also be printed rather than trying to include every single upload.
+            </div>
+
+            <div class="highlight-item">
+              <strong>Delivered after the wedding</strong><br />
+              Printed keepsake options can be arranged for delivery within 2 weeks after the wedding.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-strip">
+          <h2>Everything in one elegant place</h2>
+          <p>
+            WeddingApp.ie combines useful digital tools with personal support,
+            helping couples create a guest experience that feels modern, organised and memorable.
+          </p>
+          <div class="button-row">
+            <a class="button button-secondary" href="pricing.html">View Pricing</a>
+            <a class="button button-primary" href="contact.html">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© WeddingApp.ie • Designed by Noel Carey</div>
+      <div class="footer-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="features.html">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
